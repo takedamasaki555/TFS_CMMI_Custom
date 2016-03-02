@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tasks>
+  <task id="TestVariable" name="既定のテスト変数" plugin="Microsoft.ProjectCreationWizard.TestManagement" completionMessage="既定のテスト変数が作成されました">
+    <taskXml>
+      <TestVariables fileName="Test Management\TestVariable.xml"/>
+    </taskXml>
+  </task>
+  <task id="TestConfiguration" name="既定のテスト構成" plugin="Microsoft.ProjectCreationWizard.TestManagement" completionMessage="既定のテスト構成が作成されました">
+    <dependencies>
+      <dependency taskId="TestVariable"/>
+    </dependencies>
+    <taskXml>
+      <TestConfigurations fileName="Test Management\TestConfiguration.xml"/>
+    </taskXml>
+  </task>
+  <task id="TestSettings" name="既定のテストの設定" plugin="Microsoft.ProjectCreationWizard.TestManagement" completionMessage="既定のテストの設定が作成されました">
+    <taskXml>
+      <TestSettings fileName="Test Management\TestSettings.xml"/>
+    </taskXml>
+  </task>
+  <task id="TestResolutionState" name="既定のテストの解決の状態" plugin="Microsoft.ProjectCreationWizard.TestManagement" completionMessage="既定のテストの解決の状態が作成されました">
+    <taskXml>
+      <TestResolutionStates fileName="Test Management\TestResolutionState.xml"/>
+    </taskXml>
+  </task>
+</tasks>

@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinkTypes>
+  <LinkType ReferenceName="Microsoft.VSTS.TestCase.SharedParameterReferencedBy" ForwardName="参照元" ReverseName="参照" Topology="Dependency" />
+</LinkTypes>

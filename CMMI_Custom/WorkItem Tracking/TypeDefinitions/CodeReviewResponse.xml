@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<witd:WITD application="Work item type editor" version="1.0" xmlns:witd="http://schemas.microsoft.com/VisualStudio/2008/workitemtracking/typedef">
+  <WORKITEMTYPE name="コード レビュー応答" refname="Microsoft.VSTS.WorkItemTypes.CodeReviewResponse">
+    <DESCRIPTION>これはコード レビュー要求の作業項目を親に設定する必要がある子作業項目です。この子作業項目はレビュー担当者に割り当てられ、このレビュー担当者に関するレビューの現在の状態が含まれます。</DESCRIPTION>
+    <FIELDS>
+      <!-- ********** Core fields ******************* -->
+      <FIELD name="ID" refname="System.Id" type="Integer" reportable="dimension"/>
+      <FIELD name="担当者" refname="System.AssignedTo" type="String" reportable="dimension" syncnamechanges="true">
+        <ALLOWEXISTINGVALUE/>
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="タイトル" refname="System.Title" type="String" reportable="dimension">
+        <REQUIRED/>
+      </FIELD>
+      <FIELD name="区分パス" refname="System.AreaPath" type="TreePath" reportable="dimension"/>
+      <FIELD name="イテレーション パス" refname="System.IterationPath" type="TreePath" reportable="dimension"/>
+      <FIELD name="承諾日" refname="Microsoft.VSTS.CodeReview.AcceptedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="承諾者" refname="Microsoft.VSTS.CodeReview.AcceptedBy" type="String" reportable="dimension" syncnamechanges="true"/>
+      <FIELD name="作成日" refname="System.CreatedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="作成者" refname="System.CreatedBy" type="String" reportable="dimension" syncnamechanges="true"/>
+      <FIELD name="変更日" refname="System.ChangedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="変更者" refname="System.ChangedBy" type="String" reportable="dimension" syncnamechanges="true"/>
+      <FIELD name="終了日" refname="Microsoft.VSTS.Common.ClosedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="終了者" refname="Microsoft.VSTS.Common.ClosedBy" type="String" reportable="dimension" syncnamechanges="true"/>
+      <FIELD name="状態" refname="System.State" type="String" reportable="dimension"/>
+      <FIELD name="理由" refname="System.Reason" type="String" reportable="dimension"/>
+      <FIELD name="レビュー担当者" refname="Microsoft.VSTS.Common.ReviewedBy" type="String"/>
+      <FIELD name="終了コメント" refname="Microsoft.VSTS.CodeReview.ClosingComment" type="String"/>
+      <FIELD name="終了ステータス コード" refname="Microsoft.VSTS.CodeReview.ClosedStatusCode" type="Integer">
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatus" value="">
+          <COPY from="value" value="0"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatus" value="良好">
+          <COPY from="value" value="1"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatus" value="コメント付き">
+          <COPY from="value" value="2"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatus" value="要修正">
+          <COPY from="value" value="3"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatus" value="拒否">
+          <COPY from="value" value="4"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatus" value="削除済み">
+          <COPY from="value" value="5"/>
+        </WHEN>
+        <ALLOWEDVALUES expanditems="true">
+          <LISTITEM value="0"/>
+          <LISTITEM value="1"/>
+          <LISTITEM value="2"/>
+          <LISTITEM value="3"/>
+          <LISTITEM value="4"/>
+          <LISTITEM value="5"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="0"/>
+      </FIELD>
+      <FIELD name="終了ステータス" refname="Microsoft.VSTS.CodeReview.ClosedStatus" type="String" reportable="dimension">
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatusCode" value="0">
+          <COPY from="value" value=""/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatusCode" value="1">
+          <COPY from="value" value="良好"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatusCode" value="2">
+          <COPY from="value" value="コメント付き"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatusCode" value="3">
+          <COPY from="value" value="要修正"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatusCode" value="4">
+          <COPY from="value" value="拒否"/>
+        </WHEN>
+        <WHEN field="Microsoft.VSTS.CodeReview.ClosedStatusCode" value="5">
+          <COPY from="value" value="削除済み"/>
+        </WHEN>
+        <ALLOWEDVALUES>
+          <LISTITEM value="良好"/>
+          <LISTITEM value="コメント付き"/>
+          <LISTITEM value="要修正"/>
+          <LISTITEM value="拒否"/>
+          <LISTITEM value="削除済み"/>
+        </ALLOWEDVALUES>
+      </FIELD>
+      <!-- **************** Team Build Integration Fields **************  -->
+      <FIELD name="統合ビルド" refname="Microsoft.VSTS.Build.IntegrationBuild" type="String" reportable="dimension">
+        <HELPTEXT>バグが修正されたビルド</HELPTEXT>
+        <SUGGESTEDVALUES>
+          <LISTITEM value="&lt;なし&gt;"/>
+        </SUGGESTEDVALUES>
+      </FIELD>
+      <!-- **************** Mirror field to determine the current state in code -->
+      <FIELD name="状態コード" refname="Microsoft.VSTS.Common.StateCode" type="Integer">
+        <WHEN field="System.State" value="要求">
+          <COPY from="value" value="0"/>
+        </WHEN>
+        <WHEN field="System.State" value="承諾済み">
+          <COPY from="value" value="1"/>
+        </WHEN>
+        <WHEN field="System.State" value="終了">
+          <COPY from="value" value="2"/>
+        </WHEN>
+        <ALLOWEDVALUES expanditems="true">
+          <LISTITEM value="0"/>
+          <LISTITEM value="1"/>
+          <LISTITEM value="2"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="0"/>
+      </FIELD>
+    </FIELDS>
+
+    <!-- *************** Workflow ****************   -->
+    <WORKFLOW>
+      <STATES>
+        <STATE value="要求">
+          <FIELDS>
+            <FIELD refname="System.AssignedTo">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.AcceptedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.AcceptedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosedStatus">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosedStatusCode">
+              <READONLY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosingComment">
+              <EMPTY/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+
+        <STATE value="承諾済み">
+          <FIELDS>
+            <FIELD refname="System.AssignedTo">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.AcceptedDate">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.AcceptedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosedStatus">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosedStatusCode">
+              <READONLY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosingComment">
+              <EMPTY/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+
+        <STATE value="終了">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.ClosedStatus">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+      </STATES>
+
+      <TRANSITIONS>
+        <TRANSITION from="" to="要求">
+          <REASONS>
+            <DEFAULTREASON value="新規"/>
+          </REASONS>
+        </TRANSITION>
+
+        <TRANSITION from="要求" to="承諾済み">
+          <ACTIONS>
+            <ACTION value="Microsoft.VSTS.CodeReview.Accept"/>
+          </ACTIONS>
+          <REASONS>
+            <DEFAULTREASON value="承諾済み"/>
+          </REASONS>
+          <FIELDS>
+            <!-- Remember the Acceptor -->
+            <FIELD refname="Microsoft.VSTS.CodeReview.AcceptedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CodeReview.AcceptedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <!-- Assign the workitem to user -->
+            <FIELD refname="System.AssignedTo">
+              <COPY from="currentuser"/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+
+        <TRANSITION from="要求" to="終了">
+          <ACTIONS>
+            <ACTION value="Microsoft.VSTS.CodeReview.Decline"/>
+            <ACTION value="Microsoft.VSTS.CodeReview.Remove"/>
+          </ACTIONS>
+          <REASONS>
+            <DEFAULTREASON value="終了"/>
+          </REASONS>
+          <FIELDS>
+            <!-- Set the closing person -->
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <!-- Set the closing date -->
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <!-- Unassign the workitem -->
+            <FIELD refname="System.AssignedTo">
+              <COPY from="value" value=""/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+
+        <TRANSITION from="承諾済み" to="終了">
+          <ACTIONS>
+            <ACTION value="Microsoft.VSTS.CodeReview.Complete"/>
+            <ACTION value="Microsoft.VSTS.CodeReview.Decline"/>
+            <ACTION value="Microsoft.VSTS.CodeReview.Remove"/>
+          </ACTIONS>
+          <REASONS>
+            <DEFAULTREASON value="終了"/>
+          </REASONS>
+          <FIELDS>
+            <!-- Set the closing date -->
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <!-- Set the closing person -->
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <!-- Unassign the workitem -->
+            <FIELD refname="System.AssignedTo">
+              <COPY from="value" value=""/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+
+        <TRANSITION from="終了" to="要求">
+          <ACTIONS>
+            <ACTION value="Microsoft.VSTS.CodeReview.Reassign"/>
+          </ACTIONS>
+          <REASONS>
+            <DEFAULTREASON value="再アクティブ化済み"/>
+          </REASONS>
+        </TRANSITION>
+      </TRANSITIONS>
+    </WORKFLOW>
+
+    <FORM>
+      <Layout HideControlBorders="true">
+        <Group>
+          <Column PercentWidth="90">
+            <Control ReadOnly="True" Type="FieldControl" FieldName="System.Title" EmptyText="&lt;ここにタイトルを入力してください&gt;"/>
+            <Control ReadOnly="True" Type="FieldControl" FieldName="System.AssignedTo" ControlFontSize="large" Label="担当者(&amp;G)" LabelPosition="Left" EmptyText="&lt;なし&gt;"/>
+            <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.Common.ReviewedBy" Label="レビュー担当者" LabelPosition="Left"/>
+          </Column>
+          <Column PercentWidth="10">
+            <Control FieldName="System.ID" Type="FieldControl" ControlFontSize="large"/>
+          </Column>
+        </Group>
+        <Group Margin="(5,0,0,0)">
+          <Column PercentWidth="50">
+            <Group Label="ステータス">
+              <Column PercentWidth="100">
+                <Control ReadOnly="True" Type="FieldControl" FieldName="System.State" Label="状態(&amp;E)" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="System.Reason" Label="理由" LabelPosition="Left"/>
+              </Column>
+            </Group>
+            <Group Label="分類">
+              <Column PercentWidth="100">
+                <Control ReadOnly="True" Type="WorkItemClassificationControl" FieldName="System.AreaPath" Label="区分(&amp;A)" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="WorkItemClassificationControl" FieldName="System.IterationPath" Label="イテレーション(&amp;R)" LabelPosition="Left"/>
+              </Column>
+            </Group>
+          </Column>
+          <Column PercentWidth="50">
+            <Group Label="システム情報">
+              <Column PercentWidth="100">
+                <Control ReadOnly="True" Type="FieldControl" FieldName="System.CreatedBy" Label="作成者" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="System.CreatedDate" Label="作成日" LabelPosition="Left"/>
+
+                <Control ReadOnly="True" Type="FieldControl" FieldName="System.ChangedBy" Label="更新者" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="System.ChangedDate" Label="更新日" LabelPosition="Left"/>
+
+                <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.CodeReview.AcceptedBy" Label="承諾者" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.CodeReview.AcceptedDate" Label="承諾日" LabelPosition="Left"/>
+
+                <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.Common.ClosedBy" Label="終了者" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.Common.ClosedDate" Label="終了日" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.CodeReview.ClosedStatus" Label="終了ステータス" LabelPosition="Left"/>
+                <Control ReadOnly="True" Type="FieldControl" FieldName="Microsoft.VSTS.CodeReview.ClosingComment" Label="終了コメント" LabelPosition="Left"/>
+              </Column>
+            </Group>
+          </Column>
+        </Group>
+        <Group Margin="(5,0,0,0)">
+          <Column PercentWidth="100">
+            <Control ReadOnly="True" Type="WorkItemLogControl" FieldName="System.History" Label="履歴(&amp;Y)" LabelPosition="Top" Dock="Fill"/>
+          </Column>
+        </Group>
+      </Layout>
+    </FORM>
+  </WORKITEMTYPE>
+</witd:WITD>

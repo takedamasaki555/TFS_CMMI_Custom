@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestSettings name="ローカル テストの実行" id="0c8dfb62-36ce-4137-b91a-4355cc65d352" enableDefaultDataCollectors="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+    <Description>これはローカル テスト実行用の既定のテスト設定です。</Description>
+    <Execution>
+        <TestTypeSpecific/>
+        <AgentRule name="ローカル">
+            <SelectionCriteria>
+                <AgentProperty name="__Test Environment" value="__Placeholder_TestEnvironmentName"/>
+                <AgentProperty name="__Machine Role" value="Local"/>
+            </SelectionCriteria>
+            <DataCollectors/>
+        </AgentRule>
+    </Execution>
+</TestSettings>

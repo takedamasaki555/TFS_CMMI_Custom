@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tasks>
+  <task id="Site" plugin="Microsoft.ProjectCreationWizard.Reporting" completionMessage="プロジェクト レポート サイトが作成されました。">
+    <dependencies/>
+    <taskXml>
+      <ReportingServices>
+        <site></site>
+      </ReportingServices>
+    </taskXml>
+  </task>
+  <task id="Populate Reports" plugin="Microsoft.ProjectCreationWizard.Reporting" completionMessage="プロジェクト レポートをアップロードしました。">
+    <dependencies>
+      <dependency taskId="Site"/>
+    </dependencies>
+    <taskXml>
+      <ReportingServices>
+        <folders>
+          <folder path="バグ"/>
+          <folder path="ビルド"/>
+          <folder path="プロジェクト管理"/>
+          <folder path="テスト"/>
+          <folder path="ダッシュボード"/>
+        </folders>
+        <reports>
+          <report name="バグの状態" filename="Reports\Bug Status.rdl" folder="バグ" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="バグの傾向" filename="Reports\Bug Trends.rdl" folder="バグ" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="再アクティブ化" filename="Reports\Reactivations.rdl" folder="バグ" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="ビルド品質指標" filename="Reports\Build Quality Indicators.rdl" folder="ビルド" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="一定期間内のビルド成功" filename="Reports\Build Success over Time.rdl" folder="ビルド" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="ビルドの概要" filename="Reports\Build Summary.rdl" folder="ビルド" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="バーンダウンとバーン レート" filename="Reports\Burndown and Burn Rate.rdl" folder="プロジェクト管理" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="残存作業" filename="Reports\Remaining Work.rdl" folder="プロジェクト管理" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="計画していなかった作業" filename="Reports\Unplanned Work.rdl" folder="プロジェクト管理" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="残存作業" filename="Reports\Remaining Work - Dashboard.rdl" folder="ダッシュボード" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="すべてのイテレーションの状態" filename="Reports\Status on All Iterations.rdl" folder="プロジェクト管理" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="必要条件の概要" filename="Reports\Requirements Overview.rdl" folder="プロジェクト管理" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="必要条件の進行状況" filename="Reports\Requirements Progress.rdl" folder="プロジェクト管理" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="テスト ケース準備" filename="Reports\Test Case Readiness.rdl" folder="テスト" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+          <report name="テスト計画の進行状況" filename="Reports\Test Plan Progress.rdl" folder="テスト" cacheExpiration="30">
+            <parameters>
+              <parameter name="ExplicitProject" value=""/>
+            </parameters>
+            <datasources>
+              <reference name="/Tfs2010OlapReportDS" dsname="TfsOlapReportDS"/>
+              <reference name="/Tfs2010ReportDS" dsname="TfsReportDS"/>
+            </datasources>
+          </report>
+        </reports>
+      </ReportingServices>
+    </taskXml>
+  </task>
+</tasks>

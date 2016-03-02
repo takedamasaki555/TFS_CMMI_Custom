@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tasks>
+  <task id="UploadStructure" name="プロジェクトの構造を作成しています" plugin="Microsoft.ProjectCreationWizard.Classification" completionMessage="チーム プロジェクトの構造が作成されました。">
+    <taskXml>
+      <Nodes>
+        <Node StructureType="ProjectLifecycle" Name="イテレーション" xmlns="">
+          <Children>
+            <Node StructureType="ProjectLifecycle" Name="イテレーション 0"/>
+            <Node StructureType="ProjectLifecycle" Name="イテレーション 1"/>
+            <Node StructureType="ProjectLifecycle" Name="イテレーション 2"/>
+          </Children>
+        </Node>
+        <Node StructureType="ProjectModelHierarchy" Name="区分" xmlns=""/>
+      </Nodes>
+      <properties>
+        <property name="MSPROJ" value="Classification\FieldMapping.xml" isFile="true"/>
+        <property name="Process Template" value="CMMI"/>
+      </properties>
+    </taskXml>
+  </task>
+</tasks>

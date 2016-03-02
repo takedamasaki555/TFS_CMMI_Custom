@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<witd:WITD application="Work item type editor" version="1.0" xmlns:witd="http://schemas.microsoft.com/VisualStudio/2008/workitemtracking/typedef">
+  <WORKITEMTYPE name="必要条件" refname="Microsoft.VSTS.WorkItemTypes.Requirement">
+    <DESCRIPTION>MSF for CMMI Process Improvement のライフ サイクルをとおして、要求をトラックするための情報を含んでいます</DESCRIPTION>
+    <FIELDS>
+      <FIELD name="ID" refname="System.Id" type="Integer" reportable="dimension"/>
+      <FIELD name="タイトル" refname="System.Title" type="String" reportable="dimension">
+        <REQUIRED/>
+        <HELPTEXT>リストまたはレポート内で区別するために使用される必要条件の短い説明</HELPTEXT>
+      </FIELD>
+      <FIELD name="必要条件の種類" refname="Microsoft.VSTS.CMMI.RequirementType" type="String" reportable="dimension">
+        <REQUIRED/>
+        <ALLOWEDVALUES>
+          <LISTITEM value="シナリオ"/>
+          <LISTITEM value="サービス品質"/>
+          <LISTITEM value="機能性"/>
+          <LISTITEM value="操作性"/>
+          <LISTITEM value="インターフェイス"/>
+          <LISTITEM value="セキュリティ"/>
+          <LISTITEM value="安全性"/>
+          <LISTITEM value="ビジネス目標"/>
+          <LISTITEM value="機能"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="機能性"/>
+      </FIELD>
+      <FIELD name="価値の分野" refname="Microsoft.VSTS.Common.ValueArea" type="String">
+        <REQUIRED/>
+        <ALLOWEDVALUES>
+          <LISTITEM value="アーキテクチャ"/>
+          <LISTITEM value="ビジネス"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="ビジネス"/>
+        <HELPTEXT>ビジネス = ユーザーまたは別のシステムに価値を提供する; アーキテクチャ = 他の要件またはコンポーネントをサポートする作業</HELPTEXT>
+      </FIELD>
+      <FIELD name="担当者" refname="System.AssignedTo" type="String" reportable="dimension" syncnamechanges="true">
+        <HELPTEXT>この必要条件を現在処理している担当者</HELPTEXT>
+        <ALLOWEXISTINGVALUE/>
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="履歴" refname="System.History" type="History">
+        <HELPTEXT>ディスカッション スレッドおよび他の履歴情報</HELPTEXT>
+      </FIELD>
+      <FIELD name="区分パス" refname="System.AreaPath" type="TreePath" reportable="dimension">
+        <HELPTEXT>この必要条件が関連付けられている製品の区分</HELPTEXT>
+      </FIELD>
+      <FIELD name="イテレーション パス" refname="System.IterationPath" type="TreePath" reportable="dimension">
+        <HELPTEXT>この必要条件が関連付けられている製品のイテレーション</HELPTEXT>
+      </FIELD>
+      <FIELD name="状態" refname="System.State" type="String" reportable="dimension">
+        <HELPTEXT>必要条件のワークフローの状態</HELPTEXT>
+      </FIELD>
+      <FIELD name="理由" refname="System.Reason" type="String" reportable="dimension">
+        <HELPTEXT>必要条件が現在の状態である理由</HELPTEXT>
+      </FIELD>
+      <FIELD name="変更日" refname="System.ChangedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="変更者" refname="System.ChangedBy" type="String" reportable="dimension" syncnamechanges="true">
+        <VALIDUSER/>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="作成日" refname="System.CreatedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="作成者" refname="System.CreatedBy" type="String" reportable="dimension" syncnamechanges="true"/>
+      <FIELD name="説明" refname="System.Description" type="HTML">
+        <HELPTEXT>実装された場合に有効になるユーザー アクティビティまたは制約と関連ドキュメントへのリンク</HELPTEXT>
+      </FIELD>
+      <FIELD name="開始日" refname="Microsoft.VSTS.Scheduling.StartDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="完了日" refname="Microsoft.VSTS.Scheduling.FinishDate" type="DateTime" reportable="dimension"/>
+      <!-- *************** Common Fields ****************   -->
+      <FIELD name="状態の変更日" refname="Microsoft.VSTS.Common.StateChangeDate" type="DateTime">
+        <WHENCHANGED field="System.State">
+          <SERVERDEFAULT from="clock"/>
+        </WHENCHANGED>
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="アクティブ化された日" refname="Microsoft.VSTS.Common.ActivatedDate" type="DateTime" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="アクティブ化した人" refname="Microsoft.VSTS.Common.ActivatedBy" type="String" syncnamechanges="true" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="解決日" refname="Microsoft.VSTS.Common.ResolvedDate" type="DateTime" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="解決者" refname="Microsoft.VSTS.Common.ResolvedBy" type="String" syncnamechanges="true" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="解決理由" refname="Microsoft.VSTS.Common.ResolvedReason" type="String" reportable="dimension"/>
+      <FIELD name="終了日" refname="Microsoft.VSTS.Common.ClosedDate" type="DateTime" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="終了者" refname="Microsoft.VSTS.Common.ClosedBy" type="String" syncnamechanges="true" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="優先度" refname="Microsoft.VSTS.Common.Priority" type="Integer" reportable="dimension">
+        <REQUIRED/>
+        <ALLOWEDVALUES>
+          <LISTITEM value="1"/>
+          <LISTITEM value="2"/>
+          <LISTITEM value="3"/>
+          <LISTITEM value="4"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="2"/>
+        <HELPTEXT>ビジネス ゴールに基づいた必要条件対応の優先度</HELPTEXT>
+      </FIELD>
+      <FIELD name="スタック順位" refname="Microsoft.VSTS.Common.StackRank" type="Double" reportable="dimension">
+        <HELPTEXT>値の小さいスタック順位の項目を最初に処理します。トリアージにより設定します。</HELPTEXT>
+      </FIELD>
+      <FIELD name="トリアージ" refname="Microsoft.VSTS.Common.Triage" type="String" reportable="dimension">
+        <REQUIRED/>
+        <ALLOWEDVALUES>
+          <LISTITEM value="保留"/>
+          <LISTITEM value="詳細"/>
+          <LISTITEM value="受信した情報"/>
+          <LISTITEM value="トリアージ済み"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="保留"/>
+        <HELPTEXT>必要条件の方針の状態</HELPTEXT>
+      </FIELD>
+      <!-- **************** Build Integration Fields *******************************************  -->
+      <FIELD name="統合ビルド" refname="Microsoft.VSTS.Build.IntegrationBuild" type="String" reportable="dimension">
+        <SUGGESTEDVALUES>
+          <LISTITEM value="&lt;なし&gt;"/>
+        </SUGGESTEDVALUES>
+        <HELPTEXT>必要条件が統合されたビルド</HELPTEXT>
+      </FIELD>
+      <!-- **************** Scheduling Fields *************************************************  -->
+      <FIELD name="サイズ" refname="Microsoft.VSTS.Scheduling.Size" type="Double" reportable="measure" formula="sum">
+        <HELPTEXT>この要件の実装について見積もられた作業サイズ</HELPTEXT>
+      </FIELD>
+      <FIELD name="最初の見積もり" refname="Microsoft.VSTS.Scheduling.OriginalEstimate" type="Double" reportable="measure" formula="sum">
+        <HELPTEXT>作業量の見積もり (人時)</HELPTEXT>
+      </FIELD>
+      <FIELD name="ブロック" refname="Microsoft.VSTS.CMMI.Blocked" type="String" reportable="dimension">
+        <ALLOWEDVALUES>
+          <LISTITEM value="はい"/>
+          <LISTITEM value="いいえ"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="いいえ"/>
+      </FIELD>
+      <FIELD name="コミット済み" refname="Microsoft.VSTS.CMMI.Committed" type="String">
+        <REQUIRED/>
+        <ALLOWEDVALUES>
+          <LISTITEM value="はい"/>
+          <LISTITEM value="いいえ"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="いいえ"/>
+        <HELPTEXT>その要求がコミットされたか確認できます。</HELPTEXT>
+      </FIELD>
+      <FIELD name="影響の評価 HTML" refname="Microsoft.VSTS.CMMI.ImpactAssessmentHtml" type="HTML"/>
+      <FIELD name="ユーザー受け入れテスト" refname="Microsoft.VSTS.CMMI.UserAcceptanceTest" type="String">
+        <REQUIRED/>
+        <ALLOWEDVALUES>
+          <LISTITEM value="成功"/>
+          <LISTITEM value="失敗"/>
+          <LISTITEM value="準備ができていません"/>
+          <LISTITEM value="準備完了"/>
+          <LISTITEM value="省略"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="準備ができていません"/>
+      </FIELD>
+      <FIELD name="領域の専門家 1" refname="Microsoft.VSTS.CMMI.SubjectMatterExpert1" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="領域の専門家 2" refname="Microsoft.VSTS.CMMI.SubjectMatterExpert2" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="領域の専門家 3" refname="Microsoft.VSTS.CMMI.SubjectMatterExpert3" type="String">
+        <VALIDUSER/>
+      </FIELD>
+    </FIELDS>
+    <WORKFLOW>
+      <STATES>
+        <STATE value="提案済み">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <EMPTY/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+        <STATE value="アクティブ">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedReason">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="System.AssignedTo">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+        <STATE value="解決済み">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedReason">
+              <COPY from="field" field="System.Reason"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="System.AssignedTo">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+        <STATE value="終了">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+      </STATES>
+      <TRANSITIONS>
+        <TRANSITION from="" to="提案済み">
+          <REASONS>
+            <DEFAULTREASON value="新規"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="System.AssignedTo">
+              <DEFAULT from="currentuser"/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="提案済み" to="アクティブ">
+          <REASONS>
+            <REASON value="調査"/>
+            <DEFAULTREASON value="承諾済み"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="アクティブ" to="提案済み">
+          <REASONS>
+            <REASON value="延期"/>
+            <DEFAULTREASON value="調査完了"/>
+          </REASONS>
+        </TRANSITION>
+        <TRANSITION from="アクティブ" to="解決済み">
+          <ACTIONS>
+            <ACTION value="Microsoft.VSTS.Actions.Checkin"/>
+          </ACTIONS>
+          <REASONS>
+            <DEFAULTREASON value="コードの完了およびシステム テストの成功"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="アクティブ" to="終了">
+          <REASONS>
+            <REASON value="破棄"/>
+            <REASON value="スコープ外"/>
+            <DEFAULTREASON value="分割"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <SERVERDEFAULT from="currentuser"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="解決済み" to="アクティブ">
+          <REASONS>
+            <DEFAULTREASON value="妥当性確認テストに失敗"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="解決済み" to="終了">
+          <REASONS>
+            <DEFAULTREASON value="妥当性確認テストに成功"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="提案済み" to="終了">
+          <REASONS>
+            <DEFAULTREASON value="却下"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <SERVERDEFAULT from="currentuser"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <SERVERDEFAULT from="currentuser"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="終了" to="アクティブ">
+          <REASONS>
+            <REASON value="スコープ内に再入"/>
+            <DEFAULTREASON value="エラーによる終了"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="System.AssignedTo">
+              <COPY from="field" field="Microsoft.VSTS.Common.ClosedBy"/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+      </TRANSITIONS>
+    </WORKFLOW>
+    <FORM>
+      <Layout HideReadOnlyEmptyFields="true" HideControlBorders="true">
+        <Group Margin="(0,0,0,5)">
+          <Column PercentWidth="90">
+            <Control Type="FieldControl" FieldName="System.Title" ControlFontSize="large" EmptyText="&lt;ここにタイトルを入力してください&gt;"/>
+          </Column>
+          <Column PercentWidth="10">
+            <Control FieldName="System.ID" Type="FieldControl" ControlFontSize="large"/>
+          </Column>
+        </Group>
+        <Group>
+          <Column PercentWidth="70">
+            <TabGroup>
+              <Tab Label="説明">
+                <Control Type="HtmlFieldControl" FieldName="System.Description" Dock="Fill"/>
+              </Tab>
+              <Tab Label="分析">
+                <Control Type="HtmlFieldControl" FieldName="Microsoft.VSTS.CMMI.ImpactAssessmentHtml" Dock="Fill"/>
+              </Tab>
+              <Tab Label="ストーリーボード">
+                <Control Type="LinksControl" Name="StoryboardsControl">
+                  <LinksControlOptions>
+                    <WorkItemLinkFilters FilterType="excludeAll"/>
+                    <ExternalLinkFilters FilterType="include">
+                      <Filter LinkType="Storyboard"/>
+                    </ExternalLinkFilters>
+                    <LinkColumns>
+                      <LinkColumn RefName="System.Title"/>
+                      <LinkColumn LinkAttribute="System.Links.Comment"/>
+                    </LinkColumns>
+                  </LinksControlOptions>
+                </Control>
+              </Tab>
+              <Tab Label="テスト ケース">
+                <Control Type="LinksControl" Name="TestedBy">
+                  <LinksControlOptions>
+                    <WorkItemLinkFilters FilterType="include">
+                      <Filter LinkType="Microsoft.VSTS.Common.TestedBy" FilterOn="forwardname"/>
+                    </WorkItemLinkFilters>
+                    <WorkItemTypeFilters FilterType="include">
+                      <Filter WorkItemType="テスト ケース"/>
+                    </WorkItemTypeFilters>
+                    <ExternalLinkFilters FilterType="excludeAll"/>
+                    <LinkColumns>
+                      <LinkColumn RefName="System.ID"/>
+                      <LinkColumn RefName="System.WorkItemType"/>
+                      <LinkColumn RefName="System.Title"/>
+                      <LinkColumn RefName="System.AssignedTo"/>
+                      <LinkColumn RefName="System.State"/>
+                      <LinkColumn LinkAttribute="System.Links.Comment"/>
+                    </LinkColumns>
+                  </LinksControlOptions>
+                </Control>
+              </Tab>
+              <Tab Label="他">
+                <Group>
+                  <Column PercentWidth="50">
+                    <Group Label="ビルドおよびテスト">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.Build.IntegrationBuild" Label="統合" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.UserAcceptanceTest" Label="ユーザー受け入れテスト" LabelPosition="Left"/>
+                      </Column>
+                    </Group>
+                    <Group Label="作業 (時間)">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.Scheduling.OriginalEstimate" Label="最初の見積もり" LabelPosition="Left"/>
+                      </Column>
+                    </Group>
+                  </Column>
+                  <Column PercentWidth="50">
+                    <Group Label="領域の専門家">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.SubjectMatterExpert1" Label="領域の専門家 1" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.SubjectMatterExpert2" Label="領域の専門家 2" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.SubjectMatterExpert3" Label="領域の専門家 3" LabelPosition="Left"/>
+                      </Column>
+                    </Group>
+                    <Group Label="スケジュール">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.Scheduling.StartDate" Label="開始日" LabelPosition="Left" ReadOnly="True"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.Scheduling.FinishDate" Label="完了日" LabelPosition="Left" ReadOnly="True"/>
+                      </Column>
+                    </Group>
+                  </Column>
+                </Group>
+              </Tab>
+              <Tab Label="すべてのリンク">
+                <Control Type="LinksControl" Name="GeneralLinks" LabelPosition="Top">
+                  <LinksControlOptions>
+                    <LinkColumns>
+                      <LinkColumn RefName="System.ID"/>
+                      <LinkColumn RefName="System.WorkItemType"/>
+                      <LinkColumn RefName="System.Title"/>
+                      <LinkColumn RefName="System.AssignedTo"/>
+                      <LinkColumn RefName="System.State"/>
+                      <LinkColumn LinkAttribute="System.Links.Comment"/>
+                    </LinkColumns>
+                    <WorkItemLinkFilters FilterType="includeAll"/>
+                    <ExternalLinkFilters FilterType="includeAll"/>
+                    <WorkItemTypeFilters FilterType="includeAll"/>
+                  </LinksControlOptions>
+                </Control>
+              </Tab>
+              <Tab Label="添付ファイル">
+                <Control Type="AttachmentsControl" LabelPosition="Top"/>
+              </Tab>
+              <Tab Label="履歴">
+                <Control Type="WorkItemLogControl" FieldName="System.History" Dock="Fill"/>
+              </Tab>
+            </TabGroup>
+          </Column>
+          <Column PercentWidth="30">
+            <Group Margin="(5,0,0,0)">
+              <Column PercentWidth="100">
+                <Group Label="ステータス">
+                  <Column PercentWidth="100">
+                    <Control Type="FieldControl" FieldName="System.AssignedTo" Label="担当者(&amp;G)" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="System.State" Label="状態(&amp;E)" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="System.Reason" Label="理由" LabelPosition="Left"/>
+                  </Column>
+                </Group>
+                <Group Label="計画">
+                  <Column PercentWidth="100">
+                    <Control Type="FieldControl" FieldName="Microsoft.VSTS.Scheduling.Size" Label="サイズ" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="Microsoft.VSTS.Common.Priority" Label="優先度" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="Microsoft.VSTS.Common.Triage" Label="トリアージ" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.Blocked" Label="ブロック" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.Committed" Label="コミット済み" LabelPosition="Left"/>
+                  </Column>
+                </Group>
+                <Group Label="分類">
+                  <Column PercentWidth="100">
+                    <Control Type="WorkItemClassificationControl" FieldName="System.AreaPath" Label="区分(&amp;A)" LabelPosition="Left"/>
+                    <Control Type="WorkItemClassificationControl" FieldName="System.IterationPath" Label="イテレーション(&amp;R)" LabelPosition="Left"/>
+                    <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequirementType" Label="種類" LabelPosition="Left"/>
+                    <Control FieldName="Microsoft.VSTS.Common.ValueArea" Type="FieldControl" Label="価値の分野" LabelPosition="Left"/>
+                  </Column>
+                </Group>
+              </Column>
+            </Group>
+          </Column>
+        </Group>
+      </Layout>
+    </FORM>
+  </WORKITEMTYPE>
+</witd:WITD>

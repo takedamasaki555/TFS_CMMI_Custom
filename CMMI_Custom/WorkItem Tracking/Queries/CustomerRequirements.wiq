@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkItemQuery Version="1">
+  <Wiql>
+		SELECT [System.Id], [System.IterationId], [System.State], [Microsoft.VSTS.Common.Priority], [System.Title] 
+		FROM WorkItems WHERE [System.TeamProject] = @project  AND  [System.WorkItemType] = '必要条件'  
+		AND ( [Microsoft.VSTS.CMMI.RequirementType] = 'シナリオ'  OR  [Microsoft.VSTS.CMMI.RequirementType] = 'サービス品質' ) 
+		ORDER BY [System.Id]
+	</Wiql>
+</WorkItemQuery>

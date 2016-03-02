@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tasks>
+  <task id="SharePointPortal" name="Sharepoint ポータルの作成" plugin="Microsoft.ProjectCreationWizard.Portal" completionMessage="プロジェクト ポータル サイトが作成されました。">
+    <dependencies/>
+    <taskXml>
+      <Portal>
+        <site template="Team Foundation Server プロジェクト ポータル" language="1041"/>
+        <documentLibraries>
+          <documentLibrary name="プロジェクト管理" description="プロジェクト管理"/>
+          <documentLibrary name="一般的なドキュメント" description="チームの一般的なドキュメント"/>
+          <documentLibrary name="プロセス ガイダンス" description="Team Foundation Server のツールとプロセスを最大限に活用する方法" isProcessGuidance="true"/>
+        </documentLibraries>
+        <folders>
+          <folder documentLibrary="プロセス ガイダンス" name="Supporting Files"/>
+        </folders>
+        <files>
+          <!-- Project Management -->
+          <file source="Windows SharePoint Services\Project Management\Wiki.htm" documentLibrary="プロジェクト管理" target="Wiki.htm"/>
+          <file source="Windows SharePoint Services\Project Management\Issues.xlsx" documentLibrary="プロジェクト管理" target="懸案事項.xlsx" queryId="トラブルシューティング/懸案事項を開く"/>
+          <file source="Windows SharePoint Services\Project Management\Triage.xlsx" documentLibrary="プロジェクト管理" target="トリアージ.xlsx" queryId="計画と追跡/未トリアージの作業項目"/>
+          <file source="Windows SharePoint Services\Project Management\Development Project Plan.mpp" documentLibrary="プロジェクト管理" target="開発プロジェクトの計画.mpp"/>
+          <file source="Windows SharePoint Services\Project Management\Test Development Plan.mpp" documentLibrary="プロジェクト管理" target="テスト開発計画.mpp"/>
+          <!-- General Documents -->
+          <file source="Windows SharePoint Services\General Documents\AuditPlan.dotx" documentLibrary="一般的なドキュメント" target="監査の計画.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\AuditReport.dotx" documentLibrary="一般的なドキュメント" target="監査レポート.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\Commitments.dotx" documentLibrary="一般的なドキュメント" target="コミットメント.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\CommunicationPlan.dotx" documentLibrary="一般的なドキュメント" target="通信の計画.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\CorrectiveActionPlan.dotx" documentLibrary="一般的なドキュメント" target="是正措置の計画.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\DocumentationPlan.dotx" documentLibrary="一般的なドキュメント" target="ドキュメントの計画.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\ImprovementSuggestion.dotx" documentLibrary="一般的なドキュメント" target="改善提案.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\LAAAMAssessmentMatrix.xltx" documentLibrary="一般的なドキュメント" target="LAAAM アセスメント表.xltx"/>
+          <file source="Windows SharePoint Services\General Documents\LifestyleSnapshot.dotx" documentLibrary="一般的なドキュメント" target="ライフスタイルのスナップショット.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\MSF CMMI Reference.xlsx" documentLibrary="一般的なドキュメント" target="MSF CMMI リファレンス.xlsx"/>
+          <file source="Windows SharePoint Services\General Documents\Performance Model.dotx" documentLibrary="一般的なドキュメント" target="パフォーマンス モデル.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\RiskCategoriesandSources.dotx" documentLibrary="一般的なドキュメント" target="リスクのカテゴリと発生元.dotx"/>
+          <file source="Windows SharePoint Services\General Documents\SharedVisionPresentation.pptx" documentLibrary="一般的なドキュメント" target="共有されたビジョン プレゼンテーション.pptx"/>
+          <!-- Process Guidance -->
+          <file source="Windows SharePoint Services\Process Guidance\ProcessGuidance.html" documentLibrary="プロセス ガイダンス" target="ProcessGuidance.html"/>
+          <file source="Windows SharePoint Services\Process Guidance\ProcessGuidance.html" documentLibrary="プロセス ガイダンス" target="ProcessGuidance.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\AboutWorkItems.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/AboutWorkItems.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\AboutWorkItems.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/AboutWorkItems.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Bug.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/バグ.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Bug.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/バグ.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\ChangeRequest.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/変更要求.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\ChangeRequest.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/変更要求.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\CodeReviewRequest.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/コード レビュー要求.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\CodeReviewRequest.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/コード レビュー要求.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\CodeReviewResponse.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/コード レビュー応答.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\CodeReviewResponse.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/コード レビュー応答.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Feature.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/機能.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Feature.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/機能.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\FeedbackRequest.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/フィードバック要求.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\FeedbackRequest.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/フィードバック要求.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\FeedbackResponse.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/フィードバック応答.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\FeedbackResponse.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/フィードバック応答.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Issue.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/懸案事項.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Issue.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/懸案事項.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Requirement.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/必要条件.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Requirement.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/必要条件.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Review.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/レビュー.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Review.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/レビュー.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Risk.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/リスク.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Risk.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/リスク.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\SharedSteps.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/共有ステップ.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\SharedSteps.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/共有ステップ.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Task.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/タスク.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\Task.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/タスク.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\TestCase.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/テスト ケース.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\Supporting Files\TestCase.htm" documentLibrary="プロセス ガイダンス" target="Supporting Files/テスト ケース.aspx"/>
+          <file source="Windows SharePoint Services\Process Guidance\ProcessGuidance.html" documentLibrary="プロセス ガイダンス" target="Supporting Files/ProcessGuidance.htm"/>
+          <file source="Windows SharePoint Services\Process Guidance\ProcessGuidance.html" documentLibrary="プロセス ガイダンス" target="Supporting Files/ProcessGuidance.aspx"/>
+        </files>
+        <activateFeatures>
+          <!-- TfsDashboardCmmiMoss -->
+          <feature featureId="3D0BA288-BF8E-47F0-9680-7556EDEF6318"/>
+          <!-- TfsDashboardCmmiProcessDocLibraries -->
+          <feature featureId="8610B95B-063F-4FB5-837C-BCF2FE9423C6"/>
+        </activateFeatures>
+      </Portal>
+    </taskXml>
+  </task>
+</tasks>

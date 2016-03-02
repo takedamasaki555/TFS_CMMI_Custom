@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cat:CATEGORIES xmlns:cat="http://schemas.microsoft.com/VisualStudio/2008/workitemtracking/categories">
+  <!-- Usage: for resilience in Test system. Even if WITs have different name, they can be referred to by the category -->
+  <CATEGORY name="バグ カテゴリ" refname="Microsoft.BugCategory">
+    <DEFAULTWORKITEMTYPE name="バグ" />
+  </CATEGORY>
+  <CATEGORY name="エピック カテゴリ" refname="Microsoft.EpicCategory">
+    <DEFAULTWORKITEMTYPE name="エピック" />
+  </CATEGORY>
+  <CATEGORY name="機能カテゴリ" refname="Microsoft.FeatureCategory">
+    <DEFAULTWORKITEMTYPE name="機能" />
+  </CATEGORY>
+  <CATEGORY name="要件カテゴリ" refname="Microsoft.RequirementCategory">
+    <DEFAULTWORKITEMTYPE name="必要条件" />
+  </CATEGORY>
+  <CATEGORY name="テスト ケース カテゴリ" refname="Microsoft.TestCaseCategory">
+    <DEFAULTWORKITEMTYPE name="テスト ケース" />
+  </CATEGORY>
+  <CATEGORY name="共有ステップ カテゴリ" refname="Microsoft.SharedStepCategory">
+    <DEFAULTWORKITEMTYPE name="共有ステップ" />
+  </CATEGORY>
+  <CATEGORY name="共有パラメーター カテゴリ" refname="Microsoft.SharedParameterCategory">
+    <DEFAULTWORKITEMTYPE name="共有パラメーター" />
+  </CATEGORY>
+  <CATEGORY name="コード レビュー要求カテゴリ" refname="Microsoft.CodeReviewRequestCategory">
+    <DEFAULTWORKITEMTYPE name="コード レビュー要求" />
+  </CATEGORY>
+  <CATEGORY name="コード レビュー応答カテゴリ" refname="Microsoft.CodeReviewResponseCategory">
+    <DEFAULTWORKITEMTYPE name="コード レビュー応答" />
+  </CATEGORY>
+  <CATEGORY name="フィードバック要求カテゴリ" refname="Microsoft.FeedbackRequestCategory">
+    <DEFAULTWORKITEMTYPE name="フィードバック要求" />
+  </CATEGORY>
+  <CATEGORY name="フィードバック応答カテゴリ" refname="Microsoft.FeedbackResponseCategory">
+    <DEFAULTWORKITEMTYPE name="フィードバック応答" />
+  </CATEGORY>
+  <CATEGORY name="テスト計画のカテゴリ" refname="Microsoft.TestPlanCategory">
+    <DEFAULTWORKITEMTYPE name="テスト計画" />
+  </CATEGORY>
+  <CATEGORY name="テスト スイートのカテゴリ" refname="Microsoft.TestSuiteCategory">
+    <DEFAULTWORKITEMTYPE name="テスト スイート" />
+  </CATEGORY>
+  <CATEGORY name="タスク カテゴリ" refname="Microsoft.TaskCategory">
+    <DEFAULTWORKITEMTYPE name="タスク" />
+  </CATEGORY>
+  <CATEGORY name="隠し型カテゴリ" refname="Microsoft.HiddenCategory">
+    <DEFAULTWORKITEMTYPE name="コード レビュー要求" />
+    <WORKITEMTYPE name="コード レビュー応答" />
+    <WORKITEMTYPE name="フィードバック要求" />
+    <WORKITEMTYPE name="フィードバック応答" />
+    <WORKITEMTYPE name="共有ステップ" />
+    <WORKITEMTYPE name="共有パラメーター" />
+    <!--WORKITEMTYPE name="テスト計画" />
+    <WORKITEMTYPE name="テスト スイート" /-->
+  </CATEGORY>
+</cat:CATEGORIES>

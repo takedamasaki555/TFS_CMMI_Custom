@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestSettings>
+    <TestSetting name="ローカル テストの実行" filename="localrun.testsettings"/>
+</TestSettings>

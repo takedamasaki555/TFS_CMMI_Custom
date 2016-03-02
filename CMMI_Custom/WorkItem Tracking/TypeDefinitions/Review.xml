@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<witd:WITD application="Work item type editor" version="1.0" xmlns:witd="http://schemas.microsoft.com/VisualStudio/2008/workitemtracking/typedef">
+  <WORKITEMTYPE name="レビュー" refname="Microsoft.VSTS.WorkItemTypes.Review">
+    <DESCRIPTION>この作業項目では、レビューおよび結果をトラックします。</DESCRIPTION>
+    <FIELDS>
+      <FIELD name="ID" refname="System.Id" type="Integer" reportable="dimension"/>
+      <FIELD name="タイトル" refname="System.Title" type="String" reportable="dimension">
+        <REQUIRED/>
+        <HELPTEXT>リストまたはレポート内で区別するために使用されるレビューの短い説明</HELPTEXT>
+      </FIELD>
+      <FIELD name="担当者" refname="System.AssignedTo" type="String" reportable="dimension" syncnamechanges="true">
+        <HELPTEXT>このレビューを現在処理している担当者</HELPTEXT>
+        <ALLOWEXISTINGVALUE/>
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="履歴" refname="System.History" type="History">
+        <HELPTEXT>ディスカッション スレッドおよび他の履歴情報</HELPTEXT>
+      </FIELD>
+      <FIELD name="区分パス" refname="System.AreaPath" type="TreePath" reportable="dimension">
+        <HELPTEXT>このレビューが関連付けられている製品の区分</HELPTEXT>
+      </FIELD>
+      <FIELD name="イテレーション パス" refname="System.IterationPath" type="TreePath" reportable="dimension">
+        <HELPTEXT>このレビューが関連付けられている製品のイテレーション</HELPTEXT>
+      </FIELD>
+      <FIELD name="状態" refname="System.State" type="String" reportable="dimension">
+        <HELPTEXT>レビューのワークフローの状態</HELPTEXT>
+      </FIELD>
+      <FIELD name="理由" refname="System.Reason" type="String" reportable="dimension">
+        <HELPTEXT>レビューが現在の状態である理由</HELPTEXT>
+      </FIELD>
+      <FIELD name="変更日" refname="System.ChangedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="変更者" refname="System.ChangedBy" type="String" reportable="dimension" syncnamechanges="true">
+        <VALIDUSER/>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="作成日" refname="System.CreatedDate" type="DateTime" reportable="dimension"/>
+      <FIELD name="作成者" refname="System.CreatedBy" type="String" reportable="dimension" syncnamechanges="true"/>
+      <!-- *************** Common Fields ****************   -->
+      <FIELD name="状態の変更日" refname="Microsoft.VSTS.Common.StateChangeDate" type="DateTime">
+        <WHENCHANGED field="System.State">
+          <SERVERDEFAULT from="clock"/>
+        </WHENCHANGED>
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="アクティブ化された日" refname="Microsoft.VSTS.Common.ActivatedDate" type="DateTime" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="アクティブ化した人" refname="Microsoft.VSTS.Common.ActivatedBy" type="String" syncnamechanges="true" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="解決日" refname="Microsoft.VSTS.Common.ResolvedDate" type="DateTime" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="解決者" refname="Microsoft.VSTS.Common.ResolvedBy" type="String" syncnamechanges="true" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <FIELD name="解決理由" refname="Microsoft.VSTS.Common.ResolvedReason" type="String" reportable="dimension"/>
+      <FIELD name="終了日" refname="Microsoft.VSTS.Common.ClosedDate" type="DateTime" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+      </FIELD>
+      <FIELD name="終了者" refname="Microsoft.VSTS.Common.ClosedBy" type="String" syncnamechanges="true" reportable="dimension">
+        <WHENNOTCHANGED field="System.State">
+          <READONLY/>
+        </WHENNOTCHANGED>
+        <ALLOWEXISTINGVALUE/>
+      </FIELD>
+      <!-- **************** Build Integration Fields *******************************************  -->
+      <FIELD name="統合ビルド" refname="Microsoft.VSTS.Build.IntegrationBuild" type="String" reportable="dimension">
+        <SUGGESTEDVALUES>
+          <LISTITEM value="&lt;なし&gt;"/>
+        </SUGGESTEDVALUES>
+        <HELPTEXT>レビューが完了されたビルド</HELPTEXT>
+      </FIELD>
+      <!-- *************** MSF for CMMI PI Fields ****************   -->
+      <FIELD name="目的" refname="Microsoft.VSTS.CMMI.Purpose" type="HTML">
+        <REQUIRED/>
+        <HELPTEXT>レビューの目的</HELPTEXT>
+      </FIELD>
+      <FIELD name="コメント" refname="Microsoft.VSTS.CMMI.Comments" type="HTML">
+        <HELPTEXT>レビューのコメント</HELPTEXT>
+      </FIELD>
+      <FIELD name="会議メモ" refname="Microsoft.VSTS.CMMI.Minutes" type="HTML">
+        <HELPTEXT>レビュー会議のメモ</HELPTEXT>
+      </FIELD>
+      <FIELD name="会議の種類" refname="Microsoft.VSTS.CMMI.MeetingType" type="String">
+        <ALLOWEDVALUES>
+          <LISTITEM value="会議"/>
+          <LISTITEM value="オフライン"/>
+        </ALLOWEDVALUES>
+        <DEFAULT from="value" value="オフライン"/>
+        <HELPTEXT>レビュー会議の種類</HELPTEXT>
+      </FIELD>
+      <FIELD name="招集日時" refname="Microsoft.VSTS.CMMI.CalledDate" type="DateTime">
+        <HELPTEXT>レビューの依頼日時</HELPTEXT>
+      </FIELD>
+      <FIELD name="招集者" refname="Microsoft.VSTS.CMMI.CalledBy" type="String">
+        <VALIDUSER/>
+        <HELPTEXT>レビューの依頼者</HELPTEXT>
+      </FIELD>
+      <FIELD name="必須出席者 1" refname="Microsoft.VSTS.CMMI.RequiredAttendee1" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 2" refname="Microsoft.VSTS.CMMI.RequiredAttendee2" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 3" refname="Microsoft.VSTS.CMMI.RequiredAttendee3" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 4" refname="Microsoft.VSTS.CMMI.RequiredAttendee4" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 5" refname="Microsoft.VSTS.CMMI.RequiredAttendee5" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 6" refname="Microsoft.VSTS.CMMI.RequiredAttendee6" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 7" refname="Microsoft.VSTS.CMMI.RequiredAttendee7" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="必須出席者 8" refname="Microsoft.VSTS.CMMI.RequiredAttendee8" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 1" refname="Microsoft.VSTS.CMMI.OptionalAttendee1" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 2" refname="Microsoft.VSTS.CMMI.OptionalAttendee2" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 3" refname="Microsoft.VSTS.CMMI.OptionalAttendee3" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 4" refname="Microsoft.VSTS.CMMI.OptionalAttendee4" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 5" refname="Microsoft.VSTS.CMMI.OptionalAttendee5" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 6" refname="Microsoft.VSTS.CMMI.OptionalAttendee6" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 7" refname="Microsoft.VSTS.CMMI.OptionalAttendee7" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="任意出席者 8" refname="Microsoft.VSTS.CMMI.OptionalAttendee8" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 1" refname="Microsoft.VSTS.CMMI.ActualAttendee1" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 2" refname="Microsoft.VSTS.CMMI.ActualAttendee2" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 3" refname="Microsoft.VSTS.CMMI.ActualAttendee3" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 4" refname="Microsoft.VSTS.CMMI.ActualAttendee4" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 5" refname="Microsoft.VSTS.CMMI.ActualAttendee5" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 6" refname="Microsoft.VSTS.CMMI.ActualAttendee6" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 7" refname="Microsoft.VSTS.CMMI.ActualAttendee7" type="String">
+        <VALIDUSER/>
+      </FIELD>
+      <FIELD name="実際の出席者 8" refname="Microsoft.VSTS.CMMI.ActualAttendee8" type="String">
+        <VALIDUSER/>
+      </FIELD>
+    </FIELDS>
+    <WORKFLOW>
+      <STATES>
+        <STATE value="アクティブ">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedReason">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+        <STATE value="解決済み">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <EMPTY/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedReason">
+              <COPY from="field" field="System.Reason"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="System.AssignedTo">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+        <STATE value="終了">
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <REQUIRED/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <REQUIRED/>
+            </FIELD>
+          </FIELDS>
+        </STATE>
+      </STATES>
+      <TRANSITIONS>
+        <TRANSITION from="" to="アクティブ">
+          <REASONS>
+            <DEFAULTREASON value="新規"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.CMMI.CalledBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.CMMI.CalledDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <FIELD refname="System.AssignedTo">
+              <DEFAULT from="currentuser"/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="アクティブ" to="解決済み">
+          <REASONS>
+            <REASON value="重大な変更を伴って承諾済み"/>
+            <DEFAULTREASON value="軽微な変更を伴って承諾済み"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="解決済み" to="終了">
+          <REASONS>
+            <DEFAULTREASON value="軽微な変更の完了"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="アクティブ" to="終了">
+          <REASONS>
+            <DEFAULTREASON value="承諾済み (現状)"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="終了" to="アクティブ">
+          <REASONS>
+            <DEFAULTREASON value="エラーによる終了"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+            <FIELD refname="System.AssignedTo">
+              <COPY from="field" field="Microsoft.VSTS.Common.ClosedBy"/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+        <TRANSITION from="解決済み" to="アクティブ">
+          <REASONS>
+            <DEFAULTREASON value="重大な変更の完了"/>
+          </REASONS>
+          <FIELDS>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+              <SERVERDEFAULT from="clock"/>
+            </FIELD>
+            <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+              <COPY from="currentuser"/>
+              <VALIDUSER/>
+            </FIELD>
+          </FIELDS>
+        </TRANSITION>
+      </TRANSITIONS>
+    </WORKFLOW>
+    <FORM>
+      <Layout HideReadOnlyEmptyFields="true" HideControlBorders="true">
+        <Group Margin="(4,0,0,0)">
+          <Column PercentWidth="90">
+            <Control Type="FieldControl" FieldName="System.Title" ControlFontSize="large" EmptyText="&lt;ここにタイトルを入力してください&gt;"/>
+          </Column>
+          <Column PercentWidth="10">
+            <Control FieldName="System.ID" Type="FieldControl" ControlFontSize="large"/>
+          </Column>
+        </Group>
+        <Group Margin="(10,0,0,0)">
+          <Column PercentWidth="50">
+            <Group Label="ステータス">
+              <Column PercentWidth="100">
+                <Control Type="FieldControl" FieldName="System.AssignedTo" Label="担当者(&amp;G)" LabelPosition="Left"/>
+                <Control Type="FieldControl" FieldName="System.State" Label="状態(&amp;E)" LabelPosition="Left"/>
+                <Control Type="FieldControl" FieldName="System.Reason" Label="理由" LabelPosition="Left"/>
+              </Column>
+            </Group>
+          </Column>
+          <Column PercentWidth="50">
+            <Group Label="会議">
+              <Column PercentWidth="100">
+                <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.CalledBy" Label="招集者" LabelPosition="Left"/>
+                <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.CalledDate" Label="招集日時" LabelPosition="Left"/>
+                <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.MeetingType" Label="会議の種類" LabelPosition="Left"/>
+              </Column>
+            </Group>
+          </Column>
+        </Group>
+        <Group>
+          <Column PercentWidth="50">
+            <TabGroup>
+              <Tab Label="目的">
+                <Control Type="HtmlFieldControl" FieldName="Microsoft.VSTS.CMMI.Purpose" Dock="Fill"/>
+              </Tab>
+              <Tab Label="会議メモ">
+                <Control Type="HtmlFieldControl" FieldName="Microsoft.VSTS.CMMI.Minutes" Dock="Fill"/>
+              </Tab>
+              <Tab Label="コメント">
+                <Control Type="HtmlFieldControl" FieldName="Microsoft.VSTS.CMMI.Comments" Dock="Fill"/>
+              </Tab>
+              <Tab Label="出席者">
+                <Group>
+                  <Column PercentWidth="50">
+                    <Group Label="省略不可">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee1" Label="必須出席者 1" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee2" Label="必須出席者 2" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee3" Label="必須出席者 3" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee4" Label="必須出席者 4" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee5" Label="必須出席者 5" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee6" Label="必須出席者 6" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee7" Label="必須出席者 7" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.RequiredAttendee8" Label="必須出席者 8" LabelPosition="Left"/>
+                      </Column>
+                    </Group>
+                  </Column>
+                  <Column PercentWidth="50">
+                    <Group Label="実績">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee1" Label="実際の出席者 1" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee2" Label="実際の出席者 2" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee3" Label="実際の出席者 3" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee4" Label="実際の出席者 4" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee5" Label="実際の出席者 5" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee6" Label="実際の出席者 6" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee7" Label="実際の出席者 7" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.ActualAttendee8" Label="実際の出席者 8" LabelPosition="Left"/>
+                      </Column>
+                    </Group>
+                  </Column>
+                </Group>
+                <Group>
+                  <Column PercentWidth="100">
+                    <Group Label="任意">
+                      <Column PercentWidth="100">
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee1" Label="任意出席者 1" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee2" Label="任意出席者 2" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee3" Label="任意出席者 3" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee4" Label="任意出席者 4" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee5" Label="任意出席者 5" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee6" Label="任意出席者 6" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee7" Label="任意出席者 7" LabelPosition="Left"/>
+                        <Control Type="FieldControl" FieldName="Microsoft.VSTS.CMMI.OptionalAttendee8" Label="任意出席者 8" LabelPosition="Left"/>
+                      </Column>
+                    </Group>
+                  </Column>
+                </Group>
+              </Tab>
+            </TabGroup>
+          </Column>
+          <Column PercentWidth="50">
+            <TabGroup Margin="(5,0,0,0)">
+              <Tab Label="履歴">
+                <Control Type="WorkItemLogControl" FieldName="System.History" Dock="Fill"/>
+              </Tab>
+              <Tab Label="添付ファイル">
+                <Control Type="AttachmentsControl" LabelPosition="Top"/>
+              </Tab>
+              <Tab Label="すべてのリンク">
+                <Control Type="LinksControl" LabelPosition="Top">
+                  <LinksControlOptions>
+                    <LinkColumns>
+                      <LinkColumn RefName="System.ID"/>
+                      <LinkColumn RefName="System.WorkItemType"/>
+                      <LinkColumn RefName="System.Title"/>
+                      <LinkColumn RefName="System.AssignedTo"/>
+                      <LinkColumn RefName="System.State"/>
+                      <LinkColumn LinkAttribute="System.Links.Comment"/>
+                    </LinkColumns>
+                    <WorkItemLinkFilters FilterType="includeAll"/>
+                    <ExternalLinkFilters FilterType="includeAll"/>
+                    <WorkItemTypeFilters FilterType="includeAll"/>
+                  </LinksControlOptions>
+                </Control>
+              </Tab>
+            </TabGroup>
+          </Column>
+        </Group>
+      </Layout>
+    </FORM>
+  </WORKITEMTYPE>
+</witd:WITD>

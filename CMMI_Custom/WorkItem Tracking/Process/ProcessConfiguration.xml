@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectProcessConfiguration>
+  <TypeFields>
+    <TypeField refname="System.AreaPath" type="Team" />
+    <TypeField refname="Microsoft.VSTS.Scheduling.RemainingWork" type="RemainingWork" format="{0} 時間" />
+    <TypeField refname="Microsoft.VSTS.Common.StackRank" type="Order" />
+    <TypeField refname="Microsoft.VSTS.Scheduling.Size" type="Effort" />
+    <TypeField refname="Microsoft.VSTS.Common.Discipline" type="Activity" />
+    <TypeField refname="Microsoft.VSTS.Feedback.ApplicationStartInformation" type="ApplicationStartInformation" />
+    <TypeField refname="Microsoft.VSTS.Feedback.ApplicationLaunchInstructions" type="ApplicationLaunchInstructions" />
+    <TypeField refname="Microsoft.VSTS.Feedback.ApplicationType" type="ApplicationType">
+      <TypeFieldValues>
+        <TypeFieldValue value="Web アプリケーション" type="WebApp" />
+        <TypeFieldValue value="リモート コンピューター" type="RemoteMachine" />
+        <TypeFieldValue value="クライアント アプリケーション" type="ClientApp" />
+      </TypeFieldValues>
+    </TypeField>
+  </TypeFields>
+  <PortfolioBacklogs>
+    <PortfolioBacklog category="Microsoft.EpicCategory" pluralName="エピック" singularName="エピック" workItemCountLimit="1000">
+      <States>
+        <State value="提案済み" type="Proposed" />
+        <State value="アクティブ" type="InProgress" />
+        <State value="解決済み" type="InProgress" />
+        <State value="終了" type="Complete" />
+      </States>
+      <Columns>
+        <Column refname="System.WorkItemType" width="100" />
+        <Column refname="System.Title" width="400" />
+        <Column refname="System.State" width="100" />
+        <Column refname="Microsoft.VSTS.Scheduling.Effort" width="50" />
+        <Column refname="Microsoft.VSTS.Common.BusinessValue" width="50" />
+        <Column refname="Microsoft.VSTS.Common.ValueArea" width="100" />
+        <Column refname="System.Tags" width="200" />
+      </Columns>
+      <AddPanel>
+        <Fields>
+          <Field refname="System.Title" />
+        </Fields>
+      </AddPanel>
+    </PortfolioBacklog>
+    <PortfolioBacklog category="Microsoft.FeatureCategory" pluralName="機能" singularName="機能" parent="Microsoft.EpicCategory" workItemCountLimit="1000">
+      <States>
+        <State value="提案済み" type="Proposed" />
+        <State value="アクティブ" type="InProgress" />
+        <State value="解決済み" type="InProgress" />
+        <State value="終了" type="Complete" />
+      </States>
+      <Columns>
+        <Column refname="System.WorkItemType" width="100" />
+        <Column refname="System.Title" width="400" />
+        <Column refname="System.State" width="100" />
+        <Column refname="Microsoft.VSTS.Scheduling.Effort" width="50" />
+        <Column refname="Microsoft.VSTS.Common.BusinessValue" width="50" />
+        <Column refname="Microsoft.VSTS.Common.ValueArea" width="100" />
+        <Column refname="System.Tags" width="200" />
+      </Columns>
+      <AddPanel>
+        <Fields>
+          <Field refname="System.Title" />
+        </Fields>
+      </AddPanel>
+    </PortfolioBacklog>
+  </PortfolioBacklogs>
+  <RequirementBacklog category="Microsoft.RequirementCategory" pluralName="必要条件" singularName="必要条件" workItemCountLimit="1000">
+    <States>
+      <State value="提案済み" type="Proposed" />
+      <State value="アクティブ" type="InProgress" />
+      <State value="解決済み" type="InProgress" />
+      <State value="終了" type="Complete" />
+    </States>
+    <Columns>
+      <Column refname="System.WorkItemType" width="100" />
+      <Column refname="System.Title" width="400" />
+      <Column refname="System.State" width="100" />
+      <Column refname="Microsoft.VSTS.Scheduling.Size" width="50" />
+      <Column refname="Microsoft.VSTS.CMMI.RequirementType" width="150" />
+      <Column refname="Microsoft.VSTS.Common.ValueArea" width="100" />
+      <Column refname="System.IterationPath" width="200" />
+      <Column refname="System.Tags" width="200" />
+    </Columns>
+    <AddPanel>
+      <Fields>
+        <Field refname="System.Title" />
+        <Field refname="Microsoft.VSTS.CMMI.RequirementType" />
+      </Fields>
+    </AddPanel>
+  </RequirementBacklog>
+  <TaskBacklog category="Microsoft.TaskCategory" pluralName="タスク" singularName="タスク" workItemCountLimit="1000">
+    <States>
+      <State value="提案済み" type="Proposed" />
+      <State value="アクティブ" type="InProgress" />
+      <State value="解決済み" type="InProgress" />
+      <State value="終了" type="Complete" />
+    </States>
+    <Columns>
+      <Column refname="System.Title" width="400" />
+      <Column refname="System.State" width="100" />
+      <Column refname="System.AssignedTo" width="100" />
+      <Column refname="Microsoft.VSTS.Scheduling.RemainingWork" width="50" />
+    </Columns>
+    <AddPanel>
+      <Fields>
+        <Field refname="System.Title" />
+      </Fields>
+    </AddPanel>
+  </TaskBacklog>
+  <BugWorkItems category="Microsoft.BugCategory" pluralName="バグ" singularName="バグ">
+    <States>
+      <State value="提案済み" type="Proposed" />
+      <State value="アクティブ" type="InProgress" />
+      <State value="解決済み" type="Resolved" />
+      <State value="終了" type="Complete" />
+    </States>
+  </BugWorkItems>
+  <FeedbackRequestWorkItems category="Microsoft.FeedbackRequestCategory" pluralName="フィードバック要求" singularName="フィードバック要求">
+    <States>
+      <State value="アクティブ" type="InProgress" />
+      <State value="終了" type="Complete" />
+    </States>
+  </FeedbackRequestWorkItems>
+  <FeedbackResponseWorkItems category="Microsoft.FeedbackResponseCategory" pluralName="フィードバック応答" singularName="フィードバック応答">
+    <States>
+      <State value="アクティブ" type="InProgress" />
+      <State value="終了" type="Complete" />
+    </States>
+  </FeedbackResponseWorkItems>
+  <Weekends>
+    <DayOfWeek>Saturday</DayOfWeek>
+    <DayOfWeek>Sunday</DayOfWeek>
+  </Weekends>
+  <WorkItemColors>
+    <WorkItemColor primary="FF009CCC" secondary="FFD6ECF2" name="必要条件" />
+    <WorkItemColor primary="FF773B93" secondary="FFEEE2F2" name="機能" />
+    <WorkItemColor primary="FFFF7B00" secondary="FFFFD7B5" name="エピック" />
+    <WorkItemColor primary="FFF2CB1D" secondary="FFF6F5D2" name="タスク" />
+    <WorkItemColor primary="FFCC293D" secondary="FFFAEAE5" name="バグ" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="変更要求" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="コード レビュー要求" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="コード レビュー応答" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="フィードバック要求" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="フィードバック応答" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="懸案事項" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="レビュー" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="リスク" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="共有ステップ" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="テスト ケース" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="テスト計画" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="テスト スイート" />
+    <WorkItemColor primary="FFFF9D00" secondary="FFFCEECF" name="共有パラメーター" />
+  </WorkItemColors>
+  <Properties>
+    <Property name="BugsBehavior" value="AsTasks" />
+    <Property name="HiddenBacklogs" value="Microsoft.EpicCategory" />
+  </Properties>
+</ProjectProcessConfiguration>

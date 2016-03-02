@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkItemQuery Version="1">
+  <Wiql>
+		SELECT [System.Id], [System.IterationId], [System.State], [Microsoft.VSTS.Common.Priority], [System.Title] 
+		FROM WorkItems 
+		WHERE [System.TeamProject] = @project  
+		AND  [System.WorkItemType] = '必要条件'  
+		AND  (
+                       [Microsoft.VSTS.CMMI.RequirementType] = '機能性' OR
+                       [Microsoft.VSTS.CMMI.RequirementType] = 'インターフェイス'  OR  
+                       [Microsoft.VSTS.CMMI.RequirementType] = '操作性'  OR 
+                       [Microsoft.VSTS.CMMI.RequirementType] = 'セキュリティ'  OR 
+                       [Microsoft.VSTS.CMMI.RequirementType] = '安全性'  OR  
+                       [Microsoft.VSTS.CMMI.RequirementType] = '機能'
+                 ) 
+		ORDER BY [System.Id]
+	</Wiql>
+</WorkItemQuery>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tasks>
+  <task id="LinkTypes" name="LinkType の定義" plugin="Microsoft.ProjectCreationWizard.WorkItemTracking" completionMessage="作業項目のリンクの種類を作成しました">
+    <taskXml>
+      <LINKTYPES>
+        <LINKTYPE fileName="WorkItem Tracking\LinkTypes\SharedStep.xml"/>
+        <LINKTYPE fileName="WorkItem Tracking\LinkTypes\TestedBy.xml"/>
+        <LINKTYPE fileName="WorkItem Tracking\LinkTypes\Affects.xml"/>
+        <LINKTYPE fileName="WorkItem Tracking\LinkTypes\SharedParameterLink.xml"/>
+      </LINKTYPES>
+    </taskXml>
+  </task>
+  <task id="WITs" name="WorkItemType の定義" plugin="Microsoft.ProjectCreationWizard.WorkItemTracking" completionMessage="作業項目の種類を作成しました。">
+    <dependencies>
+      <dependency taskId="LinkTypes"/>
+    </dependencies>
+    <taskXml>
+      <WORKITEMTYPES>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Bug.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\CodeReviewRequest.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\CodeReviewResponse.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Epic.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Feature.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\FeedbackRequest.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\FeedbackResponse.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Task.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Issue.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\ChangeRequest.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Risk.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Requirement.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\Review.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\TestCase.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\TestPlan.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\TestSuite.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\SharedStep.xml"/>
+        <WORKITEMTYPE fileName="WorkItem Tracking\TypeDefinitions\SharedParameter.xml"/>
+      </WORKITEMTYPES>
+    </taskXml>
+  </task>
+  <task id="Queries" name="ストアド クエリの定義" plugin="Microsoft.ProjectCreationWizard.WorkItemTracking" completionMessage="作業項目のクエリがアップロードされました">
+    <dependencies>
+      <dependency taskId="WITs"/>
+    </dependencies>
+    <taskXml>
+      <QUERIES>
+        <Permission allow="Read, Contribute, Delete, ManagePermissions, FullControl" identity="[SERVER]\$$PROJECTCOLLECTIONADMINGROUP$$"/>
+        <Permission allow="Read, Contribute, Delete, ManagePermissions, FullControl" identity="[$$PROJECTNAME$$]\$$PROJECTADMINGROUP$$"/>
+        <Permission allow="Read" identity="[$$PROJECTNAME$$]\閲覧者"/>
+        <Permission allow="Read" identity="[$$PROJECTNAME$$]\共同作成者"/>
+        <Permission allow="Read" identity="[$$PROJECTNAME$$]\ビルド管理者"/>
+        <QueryFolder name="開発とテスト">
+          <Query name="アクティブなバグ" fileName="WorkItem Tracking\Queries\ActiveBugs.wiq"/>
+          <Query name="開発タスク" fileName="WorkItem Tracking\Queries\DevelopmentTasks.wiq"/>
+          <Query name="担当テスト ケース" fileName="WorkItem Tracking\Queries\MyTestCases.wiq"/>
+          <Query name="タスクを開く" fileName="WorkItem Tracking\Queries\OpenTasks.wiq"/>
+          <Query name="テスト ケースを開く" fileName="WorkItem Tracking\Queries\OpenTestCases.wiq"/>
+          <Query name="解決済みバグ" fileName="WorkItem Tracking\Queries\ResolvedBugs.wiq"/>
+          <Query name="テスト タスク" fileName="WorkItem Tracking\Queries\TestTasks.wiq"/>
+        </QueryFolder>
+        <QueryFolder name="計画と追跡">
+          <Query name="顧客要求" fileName="WorkItem Tracking\Queries\CustomerRequirements.wiq"/>
+          <Query name="要件を開く" fileName="WorkItem Tracking\Queries\OpenRequirements.wiq"/>
+          <Query name="作業項目を開く" fileName="WorkItem Tracking\Queries\OpenWorkItems.wiq"/>
+          <Query name="製品要求" fileName="WorkItem Tracking\Queries\ProductRequirements.wiq"/>
+          <Query name="提案された作業項目" fileName="WorkItem Tracking\Queries\ProposedWorkItems.wiq"/>
+          <Query name="テスト ケースなしで要件を開く" fileName="WorkItem Tracking\Queries\RequirementsWithoutTestCases.wiq"/>
+          <Query name="レビュー" fileName="WorkItem Tracking\Queries\Reviews.wiq"/>
+          <Query name="未トリアージの作業項目" fileName="WorkItem Tracking\Queries\UntriagedWorkItems.wiq"/>
+          <Query name="作業内訳" fileName="WorkItem Tracking\Queries\WorkBreakdown.wiq"/>
+          <Query name="サマリー値のある作業項目" fileName="WorkItem Tracking\Queries\WorkItemsWithSummaryValues.wiq"/>
+        </QueryFolder>
+        <QueryFolder name="変更管理">
+          <Query name="変更要求" fileName="WorkItem Tracking\Queries\ChangeRequests.wiq"/>
+          <Query name="要件付きの変更要求を開く" fileName="WorkItem Tracking\Queries\OpenChangeRequestsWithRequirements.wiq"/>
+          <Query name="未解決の変更要求がある要件" fileName="WorkItem Tracking\Queries\RequirementsWithOpenChangeRequests.wiq"/>
+        </QueryFolder>
+        <QueryFolder name="トラブルシューティング">
+          <Query name="ブロックされた作業項目" fileName="WorkItem Tracking\Queries\BlockedWorkItems.wiq"/>
+          <Query name="是正措置" fileName="WorkItem Tracking\Queries\CorrectiveActions.wiq"/>
+          <Query name="軽減活動" fileName="WorkItem Tracking\Queries\MitigationActions.wiq"/>
+          <Query name="懸案事項を開く" fileName="WorkItem Tracking\Queries\OpenIssues.wiq"/>
+          <Query name="リスク" fileName="WorkItem Tracking\Queries\Risks.wiq"/>
+        </QueryFolder>
+        <Query name="担当作業項目" fileName="WorkItem Tracking\Queries\MyWorkItems.wiq"/>
+        <Query name="フィードバック" fileName="WorkItem Tracking\Queries\Feedback.wiq"/>
+      </QUERIES>
+    </taskXml>
+  </task>
+  <task id="Categories" name="カテゴリの定義" plugin="Microsoft.ProjectCreationWizard.WorkItemTracking" completionMessage="作業項目の種類のカテゴリが作成されました">
+    <dependencies>
+      <dependency taskId="WITs"/>
+    </dependencies>
+    <taskXml>
+      <CATEGORIES fileName="WorkItem Tracking\Categories.xml"/>
+    </taskXml>
+  </task>
+  <task id="ProcessConfiguration" name="プロセスの構成" plugin="Microsoft.ProjectCreationWizard.WorkItemTracking" completionMessage="プロセスの構成がアップロードされました">
+    <dependencies>
+      <dependency taskId="WITs"/>
+      <dependency taskId="Categories"/>
+    </dependencies>
+    <taskXml>
+      <PROCESSCONFIGURATION>
+        <ProjectConfiguration fileName="WorkItem Tracking\Process\ProcessConfiguration.xml"/>
+      </PROCESSCONFIGURATION>
+    </taskXml>
+  </task>
+</tasks>

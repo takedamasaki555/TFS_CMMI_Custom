@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProcessTemplate>
+  <metadata>
+    <name>CMMI Custom</name>
+    <description>(CMMI Custom) このテンプレートは、プロセス改善と監査可能な意思決定の記録のフレームワークを必要とする、より正式なプロジェクト用です。</description>
+    <version type="C48DAB71-CC53-46A0-B06A-388866B5300B" major="14" minor="3"/>
+    <plugins>
+      <plugin name="Microsoft.ProjectCreationWizard.Classification" wizardPage="false"/>
+      <plugin name="Microsoft.ProjectCreationWizard.Reporting" wizardPage="false"/>
+      <plugin name="Microsoft.ProjectCreationWizard.Portal" wizardPage="true"/>
+      <plugin name="Microsoft.ProjectCreationWizard.Groups" wizardPage="false"/>
+      <plugin name="Microsoft.ProjectCreationWizard.WorkItemTracking" wizardPage="false"/>
+      <plugin name="Microsoft.ProjectCreationWizard.VersionControl" wizardPage="true"/>
+      <plugin name="Microsoft.ProjectCreationWizard.TestManagement" wizardPage="false"/>
+      <plugin name="Microsoft.ProjectCreationWizard.Build" wizardPage="false"/>
+      <plugin name="Microsoft.ProjectCreationWizard.Lab" wizardPage="false"/>
+    </plugins>
+  </metadata>
+  <groups>
+    <group id="Classification" description="プロジェクトの構造定義です。" completionMessage="プロジェクトの構造をアップロードしました。">
+      <dependencies>
+      </dependencies>
+      <taskList filename="Classification\Classification.xml"/>
+    </group>
+    <group id="Groups" description="グループおよびアクセス許可の作成。" completionMessage="グループおよびアクセス許可が作成されました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+      </dependencies>
+      <taskList filename="Groups and Permissions\GroupsandPermissions.xml"/>
+    </group>
+    <group id="Portal" description="プロジェクト ポータル サイトを作成しています" completionMessage="プロジェクト ポータル タスクが完了しました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+        <dependency groupId="WorkItemTracking"/>
+        <dependency groupId="VersionControl"/>
+        <dependency groupId="Reporting"/>
+      </dependencies>
+      <taskList filename="Windows SharePoint Services\WssTasks.xml"/>
+    </group>
+    <group id="Reporting" description="プロジェクト レポートをアップロードしています。" completionMessage="プロジェクト レポート タスクが完了しました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+        <dependency groupId="WorkItemTracking"/>
+        <dependency groupId="VersionControl"/>
+      </dependencies>
+      <taskList filename="Reports\ReportsTasks.xml"/>
+    </group>
+    <group id="WorkItemTracking" description="作業項目の定義をアップロードしています。" completionMessage="作業項目の追跡タスクが完了しました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+        <dependency groupId="Groups"/>
+      </dependencies>
+      <taskList filename="WorkItem Tracking\WorkItems.xml"/>
+    </group>
+    <group id="VersionControl" description="バージョン管理を作成しています。" completionMessage="バージョン管理タスクが完了しました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+        <dependency groupId="Groups"/>
+        <dependency groupId="WorkItemTracking"/>
+      </dependencies>
+      <taskList filename="Version Control\VersionControl.xml"/>
+    </group>
+    <group id="Lab" description="ラボを作成しています。" completionMessage="ラボ タスクが完了しました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+        <dependency groupId="Groups"/>
+        <dependency groupId="WorkItemTracking"/>
+        <dependency groupId="Build"/>
+      </dependencies>
+      <taskList filename="Lab\Lab.xml"/>
+    </group>
+    <group id="TestManagement" description="テスト管理の既定の構成をアップロードしています。" completionMessage="テスト管理の既定の構成をアップロードしました。">
+      <dependencies>
+        <dependency groupId="Classification"/>
+        <dependency groupId="Groups"/>
+        <dependency groupId="WorkItemTracking"/>
+      </dependencies>
+      <taskList filename="Test Management\TestManagement.xml"/>
+    </group>
+    <group id="Build" description="ビルドの既定のプロセスをアップロードしています。" completionMessage="ビルドの既定のプロセスをアップロードしました。">
+      <dependencies>
+        <dependency groupId="VersionControl"/>
+        <dependency groupId="Groups"/>
+      </dependencies>
+      <taskList filename="Build\Build.xml"/>
+    </group>
+  </groups>
+</ProcessTemplate>
