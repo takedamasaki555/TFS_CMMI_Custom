@@ -17,8 +17,8 @@
     <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Common.Priority" ProjectField="pjTaskText19" ProjectName="作業項目の優先度" />
     <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Common.Discipline" ProjectField="pjTaskText17" />
     <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Common.StackRank" ProjectField="pjTaskNumber1" />
-    <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.StartDate" ProjectField="pjTaskStart" PublishOnly="true" />
-    <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.FinishDate" ProjectField="pjTaskFinish" PublishOnly="true" />
+    <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.StartDate" ProjectField="pjTaskStart" PublishOnly="false" />
+    <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.FinishDate" ProjectField="pjTaskFinish" PublishOnly="false" />
     <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.OriginalEstimate" ProjectField="pjTaskBaselineWork" ProjectUnits="pjHour" IfSummaryRefreshOnly="true" />
     <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.CompletedWork" ProjectField="pjTaskActualWork" ProjectUnits="pjHour" IfSummaryRefreshOnly="true" />
     <Mapping WorkItemTrackingFieldReferenceName="Microsoft.VSTS.Scheduling.RemainingWork" ProjectField="pjTaskRemainingWork" ProjectUnits="pjHour" IfSummaryRefreshOnly="true" />
