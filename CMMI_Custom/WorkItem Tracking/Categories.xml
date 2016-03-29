@@ -50,7 +50,5 @@
     <WORKITEMTYPE name="フィードバック応答" />
     <WORKITEMTYPE name="共有ステップ" />
     <WORKITEMTYPE name="共有パラメーター" />
-    <!--WORKITEMTYPE name="テスト計画" />
-    <WORKITEMTYPE name="テスト スイート" /-->
   </CATEGORY>
 </cat:CATEGORIES>
